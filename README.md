@@ -8,6 +8,20 @@ Estimate of time needed to complete: 1 :30
 
 Start time: 2:26 pm
 
-Finish time: 4
+Finish time: 3:30pm
 
 Actual time needed to complete: 2
+
+-------------------------------------
+
+Number and name of feature: feature 2
+
+Estimate of time needed to complete: 1 :30
+
+Start time: 3:50 pm
+5:30-8:30 stopping 
+Finish time: 9:30
+
+Actual time needed to complete: 3
+
+------------------------------------------------------------

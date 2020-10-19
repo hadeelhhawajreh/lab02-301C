@@ -1,6 +1,6 @@
 'use strict';
 let optionArr = ['narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon'];
-let allAnimal=[];
+let allAnimal = [];
 function Animal(animalObj) {
     this.title = animalObj.title;
     this.keyword = animalObj.keyword;
@@ -17,30 +17,26 @@ Animal.prototype.render = function () {
     templete.find('p').text(this.description);
     templete.removeClass('photo-template');
 }
-selectItem();
 function selectItem() {
-    let parent = document.getElementById('select');
-    let option;
-    for (let i = 0; i < optionArr.length; i++) {
-      option=document.createElement('option');
-      option.textContent=optionArr[i];
-      parent.appendChild(option);
+    allAnimal.forEach(element => {
+        let option = $(`<option value="${element.keyword}"> ${element.keyword}</option>`);
+        console.log(option);
+        $('select').append(option);
+    });
 
-    } 
-     show_keyWord();
 
-}
- function show_keyWord() {
-    let templete= $('.photo-template') 
-  for (let l = 0; l < allAnimal.length; l++) {
-    if( this.keyword==='narwhal'){
-           
-        templete.find('img').attr('src', this.image_url).hide();
+};
+function show_keyWord() {
+    let templete = $('.photo-template')
+    for (let l = 0; l < allAnimal.length; l++) {
+        if (this.keyword === 'narwhal') {
+
+            templete.find('img').attr('src', this.image_url).hide();
+        }
+
+        //   templete.find('img').attr('src', this.image_url).hide();
     }
 
-//   templete.find('img').attr('src', this.image_url).hide();
-  }
-   
 }
 
 Animal.readJson = () => {
@@ -54,16 +50,27 @@ Animal.readJson = () => {
             data.forEach(element => {
                 let animal_create = new Animal(element);
                 animal_create.render();
+
+                // let option = $(`<option value="${element.keyword}"> ${element.keyword}</option>`);
+                // console.log(element);
+                // $('select').append(option);
+
             });
+            selectItem();
+
         });
 };
 $(() => Animal.readJson());
 console.log('allAnimal');
 
 console.log(allAnimal);
-// var select =document.getElementById('select');
-// var opt =document.getElementsByTagName('option');
-// select.addEventListener('click',(event)=>{
-//     console.log(event);
 
-// });
+$('select').change(element => {
+    let show = element.target.value;
+    console.log(typeof(show));
+
+    $('div').css(
+        { 'display': 'none' }
+    );
+    $(`.${show}`).fadeIn(1000);
+});
