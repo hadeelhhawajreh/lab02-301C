@@ -4,10 +4,10 @@ For each of the features listed below, make an estimate of the time it will take
 
 Number and name of feature: feature 1
 
-Estimate of time needed to complete: 1 hour
+Estimate of time needed to complete: 1 :30
 
 Start time: 2:26 pm
 
-Finish time: _____
+Finish time: 4
 
-Actual time needed to complete: _____
+Actual time needed to complete: 2

@@ -1,41 +1,27 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>The Gallery of Horns</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/base.css">
 </head>
-
 <body>
     <header>
         <h1>The Gallery of Horns</h1>
-        <select>
-            <option value="narwhal"> narwhal</option>
-            <option value="triceratops"> triceratops</option>
-            <option value="rhino"> rhino</option>
-            <option value="mouflon"> mouflon</option>
-            <option value="lizard"> lizard</option>
-            <option value="dragon"> dragon</option>
-            <option value="unicorn"> unicorn</option>
-            <option value="markhor"> markhor</option>
-            <option value="chameleon"> chameleon</option>
-
+        <select id="select" >
         </select>
     </header>
     <main>
-        <template id="photo-template">
+        <div class="photo-template">
             <h2></h2>
             <img src="" alt="">
             <p></p>
-        </template>
+        </div>
     </main>
     <footer>
         &copy; 2020 Code Fellows
     </footer>
-    </main>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-
+    <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 
