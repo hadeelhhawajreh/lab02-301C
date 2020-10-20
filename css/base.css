@@ -1,6 +1,6 @@
-@import 'css/reset.css';
-@import 'css/module.css';
-@import 'css/layout.css';
+@import '/css/reset.css';
+@import '/css/module.css';
+@import '/css/layout.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 body{
