@@ -4,7 +4,7 @@ main ,header{
 h2{
     color: black;
     font-size:25px ;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
 header h1{
@@ -13,19 +13,21 @@ header h1{
     color: blueviolet;
     padding: 5px;
     font-weight: bolder;
-    margin-left: 100px;
+    margin-left: 80px;
+    letter-spacing: 15px;
 }
-div p{
+main p{
     padding-top: 10px;
 }
 #select{
-    margin-left: 40%;
-    width: 200px; 
+    margin-left: 35%;
+    width: 300px; 
      margin-top: 25px;
      border-radius: 5px;
+     text-align: center;
     height: 28px;
-    background-color: rgba(154, 139, 168,0.4);
-    color: white;
+    background-color: rgba(152, 111, 155, 0.4);
+    color: black;
     text-align: center;
     font-size: large;
 }
