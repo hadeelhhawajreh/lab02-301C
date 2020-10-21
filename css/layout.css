@@ -10,7 +10,7 @@ h2{
 header h1{
     text-align: center;
     font-size: 35px;
-    color: blueviolet;
+    color: black;
     padding: 5px;
     font-weight: bolder;
     margin-left: 80px;
@@ -21,15 +21,16 @@ main p{
 }
 #select{
     margin-left: 35%;
-    width: 300px; 
+    width: 400px; 
+    height: 200px;
      margin-top: 25px;
      border-radius: 5px;
      text-align: center;
     height: 28px;
-    background-color: rgba(152, 111, 155, 0.4);
+    background-color:silver;
     color: black;
     text-align: center;
-    font-size: large;
+    font-size: 20px;
 }
 footer{
     text-align: center;
@@ -38,5 +39,5 @@ footer{
     height: 100px;
     padding: 50px;
     box-sizing: border-box;
-    background-color: rgba(154, 139, 168,0.4);
+    background-color: rgba(31, 27, 27, 0.746);
 }

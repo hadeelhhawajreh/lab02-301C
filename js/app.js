@@ -1,7 +1,8 @@
 'use strict';
 let allAnimal = [];
-let optionArr = ['narwhal', 'narwhal', 'giraffe', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon', 'narwhal', 'narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon'];
-var pageNumber='data/page-1.json';
+let uniqueKeyArr = [];
+
+let optionArr = ['horn', 'jackalope', 'giraffe', 'Music', 'saiga', 'narwhal', 'narwhal', 'narwhal', 'giraffe', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon', 'narwhal', 'narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon'];
 function Animal(animalObj) {
     this.title = animalObj.title;
     this.keyword = animalObj.keyword;
@@ -18,28 +19,27 @@ Animal.prototype.render = function () {
     // templete.find('p').text(this.description);
     // templete.removeClass('photo-template');
     // templete.attr('class', this.keyword);
-     let templete = $('.photo-template').html();
-     let sections=Mustache.render(templete,this);
-     $('main').append(sections);
+    let templete = $('.photo-template').html();
+    let sections = Mustache.render(templete, this);
+    $('main').append(sections);
 }
 
-function addSection(){
-    $('main').append(`  <template class="photo-template">
-
-    <section> //main container 
-      <h2>{{title}}</h2>
-      <img src="{{image_url}}" alt="">
-      <p>{{description}}</p>
-      <p>{{horns}}</p>
+function addSection() {
+    $('main').append(`<template class="photo-template">
+    <section class="{{keyword}}">
+        <h2 >{{title}}</h2>
+        <img src="{{image_url}}" alt="">
+        <p>{{description}}</p>
+        <p>{{horns}}</p>
     </section>
 
-  </template>`);
+</template>`);
 }
-let uniqueKeyArr = [];
-optionArr.forEach((ele) => {
-    if (!uniqueKeyArr.includes(ele)) {
-        uniqueKeyArr.push(ele);
+optionArr.forEach((element) => {
+    if (!uniqueKeyArr.includes(element)) {
+        uniqueKeyArr.push(element);
     }
+    return uniqueKeyArr;
 });
 
 function selectItem() {
@@ -51,8 +51,8 @@ function selectItem() {
 };
 
 console.log(uniqueKeyArr);
-
-Animal.readJson = () => {
+selectItem();
+let readJson = () => {
     const ajaxSettings = {
         method: 'get',
         dataType: 'json'
@@ -63,11 +63,10 @@ Animal.readJson = () => {
                 let animal_create = new Animal(element);
                 animal_create.render();
             });
-            selectItem();
 
         });
 };
-Animal.readJson2 = () => {
+let readJson2 = () => {
     const ajaxSettings = {
         method: 'get',
         dataType: 'json'
@@ -78,31 +77,57 @@ Animal.readJson2 = () => {
                 let animal_create = new Animal(element);
                 animal_create.render();
             });
-            selectItem();
         });
 };
-$(() => Animal.readJson());
-$(() => Animal.readJson2());
+$(() => readJson());
+// $(() =>  readJson2());
+
+$('#pageOne').click(() => {
+    $('section').remove();
+    addSection();
+    readJson();
+});
+$('#pageTwo').click(() => {
+    $('section').remove();
+    addSection();
+    readJson2();
+});
 
 console.log('allAnimal');
-
-console.log(allAnimal);
-
 $(document).ready(function () {
     $('select').on('change', changeing);
     function changeing(event) {
         let show = event.target.value;
         console.log(show);
-        $('main').hide();
+        $('section').hide();
         $(`.${show}`).fadeIn(1000);
     };
 });
-$(()=>{
-    $('#sort').click(function(){
-        allAnimal.sort((a,b)=>{
-            if(a.horns>b.horns)
-            return a-b;
+
+
+$(() => {
+    $('#sort').on('click', function () {
+        allAnimal=[];
+        $('section').remove();
+        addSection();
+        readJson();
+        readJson2();
+        allAnimal.sort((a, b) => {
+            if (a.horns > b.horns) {
+                return 1;
+            }
+            else if (a.horns < b.horns) {
+                return -1;
+            }
+
         });
+
+        return 0;
+
     });
+    console.log('sorting array ...');
+    console.log(allAnimal);
+    return allAnimal;
 
 });
+console.log(allAnimal);
