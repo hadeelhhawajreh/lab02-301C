@@ -11,30 +11,27 @@
     <header>
         <h1>The Gallery of Horns</h1>
         <select id="select">
+            <option  readonly="true"> choose value</option>
         </select>
 
     </header>
     <div id="buttons">
-    <button id="sort"> Sort by horns</button>
-    <button id="page one"> Go to Page one</button>
-    <button id="page two"> Go to Page one</button>
-</div>
+        <button id="sort"  > Sort by horns</button>
+        <button id="pageOne"> Page One</button>
+        <button id="pageTwo"> Page Two</button>
+    </div>
     <main>
-            <!-- <div class="photo-template">
-                <h2></h2>
-                <img src="" alt="">
-                <p></p>
-            </div> -->
-            <template class="photo-template">
-                <section> 
-=                  <h2>{{title}}</h2>
-                  <img src="{{image_url}}" alt="">
-                  <p>{{description}}</p>
-                  <p>{{horns}}</p>
-                </section>
-          
-              </template>
-          
+
+        <template class="photo-template">
+            <section class="{{keyword}}">
+                <h2 >{{title}}</h2>
+                <img src="{{image_url}}" alt="">
+                <p>{{description}}</p>
+                <p>{{horns}}</p>
+            </section>
+
+        </template>
+
     </main>
     <footer>
         &copy; 2020 Code Fellows
