@@ -1,8 +1,6 @@
 'use strict';
 let allAnimal = [];
-let uniqueKeyArr = [];
-
-let optionArr = ['horn', 'jackalope', 'giraffe', 'Music', 'saiga', 'narwhal', 'narwhal', 'narwhal', 'giraffe', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon', 'narwhal', 'narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon'];
+let allOptions = [];
 function Animal(animalObj) {
     this.title = animalObj.title;
     this.keyword = animalObj.keyword;
@@ -35,24 +33,26 @@ function addSection() {
 
 </template>`);
 }
-optionArr.forEach((element) => {
-    if (!uniqueKeyArr.includes(element)) {
-        uniqueKeyArr.push(element);
-    }
-    return uniqueKeyArr;
-});
 
-function selectItem() {
-    uniqueKeyArr.forEach(element => {
-        let option = $(`<option value="${element}"> ${element}</option>`);
-        console.log(option);
-        $('select').append(option);
-    });
-};
+// allAnimal.forEach((element) => {
+//     if (!allOptions.includes(element.keyword)) {
+//         allOptions.push(element.keyword);
+//     }
+//     return uniqueKeyArr;
+// });
 
-console.log(uniqueKeyArr);
-selectItem();
+// function selectItem() {
+//     allOptions.forEach(element => {
+//         let option = $(`<option value="${element}"> ${element}</option>`);
+//         $('select').append(option);
+//     });
+
+// console.log('aaaaaaaaaaaa');
+// console.log(allOptions);
+
+// selectItem();
 let readJson = () => {
+    allAnimal = [];
     const ajaxSettings = {
         method: 'get',
         dataType: 'json'
@@ -61,20 +61,36 @@ let readJson = () => {
         .then(data => {
             data.forEach(element => {
                 let animal_create = new Animal(element);
+                if (!allOptions.includes(element.keyword)) {
+                    let option = $(`<option value="${element.keyword}"> ${element.keyword}</option>`);
+                    $('select').append(option);
+                    allOptions.push(element.keyword);
+                }
                 animal_create.render();
             });
 
         });
 };
 let readJson2 = () => {
+    // allAnimal=[];
+
     const ajaxSettings = {
+
         method: 'get',
         dataType: 'json'
     };
     $.ajax('data/page-2.json', ajaxSettings)
+
         .then(data => {
             data.forEach(element => {
+                allAnimal = [];
                 let animal_create = new Animal(element);
+                if (!allOptions.includes(element.keyword)) {
+
+                    let option = $(`<option value="${element.keyword}"> ${element.keyword}</option>`);
+                    $('select').append(option);
+                    allOptions.push(element.keyword);
+                }
                 animal_create.render();
             });
         });
@@ -83,12 +99,24 @@ $(() => readJson());
 // $(() =>  readJson2());
 
 $('#pageOne').click(() => {
+    $('select').empty();
+    allAnimal=[];
+    allOptions=[];
+    $('select').append(`<option value="default">Filter by Keyword</option>`);
     $('section').remove();
     addSection();
+    allOptions = [];
+    allAnimal = [];
     readJson();
 });
+
 $('#pageTwo').click(() => {
-    $('section').remove();
+    $('select').empty();
+    allAnimal=[];
+    allOptions=[];
+    
+    $('select').append(`<option value="default">Filter by Keyword</option>`);
+      $('section').remove();
     addSection();
     readJson2();
 });
@@ -100,34 +128,55 @@ $(document).ready(function () {
         let show = event.target.value;
         console.log(show);
         $('section').hide();
-        $(`.${show}`).fadeIn(1000);
+        if (show === 'default') {
+            $('section').fadeIn();
+        }
+        else {
+            $(`.${show}`).fadeIn(1000);
+        }
     };
 });
 
 
-$(() => {
-    $('#sort').on('click', function () {
-        allAnimal=[];
-        $('section').remove();
+    $('#sort2').click( function () {
+        $('main').empty();
         addSection();
-        readJson();
-        readJson2();
-        allAnimal.sort((a, b) => {
-            if (a.horns > b.horns) {
-                return 1;
-            }
-            else if (a.horns < b.horns) {
-                return -1;
-            }
-
+        sortTitle();
+        
+        allAnimal.forEach(element => {
+            element.render();
         });
-
-        return 0;
-
     });
-    console.log('sorting array ...');
-    console.log(allAnimal);
-    return allAnimal;
+    $('#sort').click( function () {
+        $('main').empty();
+        addSection();
+        sortHorns();
+        allAnimal.forEach(element => {
+            element.render();
+        });
+    });
 
-});
-console.log(allAnimal);
+function sortTitle() {
+
+    allAnimal.sort( (a,b) => {
+      if(a.title.toUpperCase() > b.title.toUpperCase()){
+        return 1;
+      } else {
+        return -1;
+      }
+      return 0;
+    });
+  
+  }
+
+
+
+
+
+  function sortHorns() {
+    allAnimal.sort((a, b) => {
+      return Number(a.horns) - Number(b.horns);
+    });
+  
+  }
+  
